@@ -14,4 +14,7 @@ int main(){
 
     //Esegue calcoli e stampa a video i valori dell'esercizio 1
     esercizio_1();
+
+    //Esegue calcoli e stampa a video i valori dell'esercizio 2
+    esercizio_2();
 }

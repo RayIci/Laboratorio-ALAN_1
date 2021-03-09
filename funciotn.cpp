@@ -1,12 +1,18 @@
 #include "function.h"
 
+
+/*
+* Stampa a video (stdout) i valori dell'esercizio 1
+* ed esegue i vari calcoli richiesti dall' esercitazione 
+*/
 void esercizio_1(){
     
     double b = (d1 + 1) * std::pow(10, 20);
     double c = b * (-1);
     double a;
     
-    int opzione;
+    //Scelta del tipo di visualizzazione numerica (virgola fissa, notazione scientifica)
+    int opzione;    
     std::cout << "Esercizio 1: " << std::endl;
     std::cout << "Come vuoi visualizzare i numeri dell'esercizio 1?"  << std::endl;
     std::cout << "1) Virgola (successivamente verrà richiesto con che precisione)" << std::endl;
@@ -16,7 +22,6 @@ void esercizio_1(){
     while(opzione != 1 && opzione != 2){
         std::cout << "Errore: scelta non disponibile" << std::endl;
         std::cout << "Reinserisci un'opzione" << std::endl;
-        std::cout << "opzione scelta: " << opzione << std::endl;
         std::cin >> opzione;
     }
 
@@ -38,10 +43,12 @@ void esercizio_1(){
     std::cout << std::endl;
     std::cout << std::endl;
 
+
+    //Tutto il codice eseguito prima di questo ciclo for è "superfluo" serve solamente per scegliere come visualizzare i numeri
     for (unsigned int i=0; i<=6; i++){
-        a = (d0 + 1) * (double)std::pow(10, i);
+        a = (d0 + 1) * (double)std::pow(10, i);     //calcolo a in base al ciclo 
         
-        std::cout << "****** Giro con -> i = " << i << std::endl;
+        std::cout << "****** Giro con -> i = " << i << std::endl;       //stapa dei vari valori 
         std::cout << "Valore di a = " << a << std::endl;
         std::cout << "Valore di b = " << b << std::endl;
         std::cout << "valore di c = " << c << std::endl;
@@ -51,4 +58,51 @@ void esercizio_1(){
         std::cout << std::endl;
     }
     
+}
+
+
+/*
+* Stampa a video (stdout) i valori dell'esercizio 2
+* ed esegue i vari calcoli richiesti dall' esercitazione
+*/
+void esercizio_2(){
+
+    std::cout << "\n\nEsercizio 2: " << std::endl;
+
+    int ValueOfN[] = {3, 10, 50, 100, 150};
+    unsigned int N_count = 5;   
+    for (unsigned int i=0; i<N_count; i++){
+        std::cout << "N = " << ValueOfN[i] << " - x = 0.5 | Taylor = " << Taylor(ValueOfN[i], 0.5) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = 30 | Taylor = " << Taylor(ValueOfN[i], 30) << std::endl;
+        std::cout << std::endl;
+    }
+    std::cout << "exp(0.5) = " << exp(0.5) << std::endl;
+    std::cout << "exp(30) = " << exp(30) << std::endl;
+
+    for (unsigned int i=0; i<N_count; i++){
+        std::cout << "N = " << ValueOfN[i] << " - x = -0.5 | Taylor = " << Taylor(ValueOfN[i], -0.5) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = -30 | Taylor = " << Taylor(ValueOfN[i], -30) << std::endl;
+        std::cout << std::endl;
+    }
+    std::cout << "exp(0.5) = " << exp(-0.5) << std::endl;
+    std::cout << "exp(30) = " << exp(-30) << std::endl;
+}
+
+/*
+* Funzione che ti restituisce la il "polinomio di Taylor"
+*/
+long double Taylor(int N, double x){
+
+    long double returnValue = 0;
+    for(int i=0; i<=N; i++){
+        returnValue += (std::pow(x, i) / factorial(i));
+    }
+    return returnValue;
+}
+
+/*
+* Funzione che ritorna il fattoriale di un numero
+*/
+long factorial(int x){
+    return (x == 0) ? 1 : x * factorial(x - 1);
 }
