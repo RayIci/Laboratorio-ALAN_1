@@ -8,7 +8,7 @@
 
 
 int main(){
-    
+
     std::cout << "***** Laboratorio 1 - Aritmetica di macchina e stabilità numerica *****" << std::endl;
     std::cout << std::endl;
 
