@@ -1,9 +1,17 @@
+/*
+*  Alex Valle S4854159
+*  Aritmetica di macchina e stabilità numerica 
+*  Laboratorio 1
+*/
+
 #include "function.h"
 
 
 int main(){
     
-    HelloWorld();
-    std::cout << "***** Laboratorio 1 ALAN *****" << std::endl;
+    std::cout << "***** Laboratorio 1 - Aritmetica di macchina e stabilità numerica *****" << std::endl;
+    std::cout << std::endl;
 
+    //Esegue calcoli e stampa a video i valori dell'esercizio 1
+    esercizio_1();
 }
