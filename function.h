@@ -27,3 +27,13 @@ long double Taylor(int N, double x);
 * Funzione che ritorna il fattoriale di un numero
 */
 long factorial(int x);
+
+/*
+* Funzione che restituisce il numero esp, cioè la precisione di macchiana per un float
+*/
+float espFloat();
+
+/*
+* Funzione che restituisce il numero esp, cioè la precisione di macchiana per un double
+*/
+double espDouble();

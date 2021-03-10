@@ -71,21 +71,26 @@ void esercizio_2(){
 
     int ValueOfN[] = {3, 10, 50, 100, 150};
     unsigned int N_count = 5;   
+
+    std::cout << "\nAlgoritmo 1: " << std::endl;
     for (unsigned int i=0; i<N_count; i++){
-        std::cout << "N = " << ValueOfN[i] << " - x = 0.5 | Taylor = " << Taylor(ValueOfN[i], 0.5) << std::endl;
-        std::cout << "N = " << ValueOfN[i] << " - x = 30 | Taylor = " << Taylor(ValueOfN[i], 30) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = exp(0.5) = " << exp(0.5) << " | Taylor = " << Taylor(ValueOfN[i], exp(0.5)) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = exp(30) = " << exp(30) << "   | Taylor = " << Taylor(ValueOfN[i], exp(30)) << std::endl;
         std::cout << std::endl;
     }
-    std::cout << "exp(0.5) = " << exp(0.5) << std::endl;
-    std::cout << "exp(30) = " << exp(30) << std::endl;
 
     for (unsigned int i=0; i<N_count; i++){
-        std::cout << "N = " << ValueOfN[i] << " - x = -0.5 | Taylor = " << Taylor(ValueOfN[i], -0.5) << std::endl;
-        std::cout << "N = " << ValueOfN[i] << " - x = -30 | Taylor = " << Taylor(ValueOfN[i], -30) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = exp(-0.5) = " << exp(-0.5) << " | Taylor = " << Taylor(ValueOfN[i], exp(-0.5)) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = exp(-30) = " << exp(-30) << "   | Taylor = " << Taylor(ValueOfN[i], exp(-30)) << std::endl;
         std::cout << std::endl;
     }
-    std::cout << "exp(0.5) = " << exp(-0.5) << std::endl;
-    std::cout << "exp(30) = " << exp(-30) << std::endl;
+
+    std::cout << "\n\nAlgoritmo 2: " << std::endl;
+    for (unsigned int i=0; i<N_count; i++){
+        std::cout << "N = " << ValueOfN[i] << " - x = 0.5 | Taylor(N, -x) = " << Taylor(ValueOfN[i], exp(-0.5)) << " | 1/(Taylor(N, x)) = " << 1 / Taylor(ValueOfN[i], exp(0.5)) << std::endl;
+        std::cout << "N = " << ValueOfN[i] << " - x = 30 | Taylor(N, -x) = " << Taylor(ValueOfN[i], exp(-30)) << " | 1/(Taylor(N, x)) = " << 1 / Taylor(ValueOfN[i], exp(30)) << std::endl;
+        std::cout << std::endl;
+    }
 }
 
 /*
@@ -105,4 +110,36 @@ long double Taylor(int N, double x){
 */
 long factorial(int x){
     return (x == 0) ? 1 : x * factorial(x - 1);
+}
+
+/*
+* Funzione che restituisce il numero esp, cioè la precisione di macchiana per un float
+*/
+float espFloat(){
+    int d = 1000000; //Valore scelto con un po' di prove, con questo valore si riesce ad ottenere la precisione di macchina
+                     //Se avessi messo il numero piu grande rappresentabile con un intero (32 bit) ci metterebbe troppo ad eseguire i cicli
+    float returnValue = std::pow(2, -d) + 1;
+
+    while(returnValue <= 1){
+        d--;
+        returnValue = std::pow(2, -d) + 1;
+    }
+
+    return returnValue - 1;
+}
+
+/*
+* Funzione che restituisce il numero esp, cioè la precisione di macchiana per un double
+*/
+double espDouble(){
+    int d = 1000000; //Valore scelto con un po' di prove, con questo valore si riesce ad ottenere la precisione di macchina
+                     //Se avessi messo il numero piu grande rappresentabile con un intero (32 bit) ci metterebbe troppo ad eseguire i cicli
+    double returnValue = std::pow(2, -d) + 1;
+
+    while(returnValue <= 1){
+        d--;
+        returnValue = std::pow(2, -d) + 1;
+    }
+
+    return returnValue - 1;
 }
