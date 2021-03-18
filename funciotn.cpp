@@ -28,10 +28,10 @@ void esercizio_1(){
     int precision = 1;
     switch (opzione){
 
-        case 1: std::cout << "Inserisci con che precisione si vogliono visualizzare i numeri,\nse viene inserita una precisione non supportata verrà scelta la\nprecisione di default (default: 5, min: 3, max: 15)" << std::endl;
+        case 1: std::cout << "Inserisci con che precisione si vogliono visualizzare i numeri,\nse viene inserita una precisione non supportata verrà scelta la\nprecisione di default (default: 5, min: 3, max: 25)" << std::endl;
                 std::cout << "Inserisci un'opzione:";
                 std::cin >> precision;
-                if (precision < 3 || precision > 15)
+                if (precision < 3 || precision > 25)
                     precision = 5;
                 std::cout << std::fixed;
                 break;
@@ -74,21 +74,27 @@ void esercizio_2(){
 
     std::cout << "\nAlgoritmo 1: " << std::endl;
     for (unsigned int i=0; i<N_count; i++){
-        std::cout << "N = " << ValueOfN[i] << " - x = exp(0.5) = " << exp(0.5) << " | Taylor = " << Taylor(ValueOfN[i], exp(0.5)) << std::endl;
-        std::cout << "N = " << ValueOfN[i] << " - x = exp(30) = " << exp(30) << "   | Taylor = " << Taylor(ValueOfN[i], exp(30)) << std::endl;
+        std::cout << "1)  N = " << ValueOfN[i] << " - x = exp(0.5) = " << exp((double)0.5) << " | Taylor = " << Taylor(ValueOfN[i], (double)0.5) << std::endl;
+        std::cout << "2)  N = " << ValueOfN[i] << " - x = exp(30) = " << exp((double)30) << "   | Taylor = " << Taylor(ValueOfN[i], (double)30) << std::endl;
+        std::cout << "1)  Errore Assoluto = " << Taylor(ValueOfN[i], (double) 0.5) - exp((double) 0.5) << " | Errore Relativo = " << (Taylor(ValueOfN[i], (double)0.5) - exp((double) 0.5)) / exp((double) 0.5) << std::endl;
+        std::cout << "2)  Errore Assoluto = " << Taylor(ValueOfN[i], (double) 30) - exp((double) 30) << " | Errore Relativo = " << (Taylor(ValueOfN[i], (double)30) - exp((double) 30)) / exp((double) 30) << std::endl;
         std::cout << std::endl;
     }
-
+    std::cout << "\n******\n" << std::endl;
     for (unsigned int i=0; i<N_count; i++){
-        std::cout << "N = " << ValueOfN[i] << " - x = exp(-0.5) = " << exp(-0.5) << " | Taylor = " << Taylor(ValueOfN[i], exp(-0.5)) << std::endl;
-        std::cout << "N = " << ValueOfN[i] << " - x = exp(-30) = " << exp(-30) << "   | Taylor = " << Taylor(ValueOfN[i], exp(-30)) << std::endl;
+        std::cout << "1)  N = " << ValueOfN[i] << " - x = exp(-0.5) = " << exp(-0.5) << " | Taylor = " << Taylor(ValueOfN[i], (double)-0.5) << std::endl;
+        std::cout << "2)  N = " << ValueOfN[i] << " - x = exp(-30) = " << exp(-30) << "   | Taylor = " << Taylor(ValueOfN[i], (double)-30) << std::endl;
+        std::cout << "1)  Errore Assoluto = " << Taylor(ValueOfN[i], (double) -0.5) - exp((double) -0.5) << " | Errore Relativo = " << (Taylor(ValueOfN[i], (double) -0.5) - exp((double) 0.5)) / exp((double) -0.5) << std::endl;
+        std::cout << "2)  Errore Assoluto = " << Taylor(ValueOfN[i], (double) -30) - exp((double) -30) << " | Errore Relativo = " << (Taylor(ValueOfN[i], (double) -30) - exp((double) 30)) / exp((double) -30) << std::endl;
         std::cout << std::endl;
     }
-
+    std::cout << "\n******\n" << std::endl;
     std::cout << "\n\nAlgoritmo 2: " << std::endl;
     for (unsigned int i=0; i<N_count; i++){
-        std::cout << "N = " << ValueOfN[i] << " - x = 0.5 | Taylor(N, -x) = " << Taylor(ValueOfN[i], exp(-0.5)) << " | 1/(Taylor(N, x)) = " << 1 / Taylor(ValueOfN[i], exp(0.5)) << std::endl;
-        std::cout << "N = " << ValueOfN[i] << " - x = 30 | Taylor(N, -x) = " << Taylor(ValueOfN[i], exp(-30)) << " | 1/(Taylor(N, x)) = " << 1 / Taylor(ValueOfN[i], exp(30)) << std::endl;
+        std::cout << "1)  N = " << ValueOfN[i] << " - x = 0.5 | Taylor(N, -x) = " << Taylor(ValueOfN[i], (double)-0.5) << " | 1/(Taylor(N, x)) = " << 1 / Taylor(ValueOfN[i], (double)0.5) << std::endl;
+        std::cout << "2)  N = " << ValueOfN[i] << " - x = 30 | Taylor(N, -x) = " << Taylor(ValueOfN[i], (double)-30) << " | 1/(Taylor(N, x)) = " << 1 / Taylor(ValueOfN[i], (double)30) << std::endl;
+        std::cout << "1)  Errore Assoluto = " << 1/Taylor(ValueOfN[i], (double) 0.5) - exp((double) -0.5) << " | Errore Relativo = " << (1/Taylor(ValueOfN[i], (double) 0.5) - exp((double) 0.5)) / exp((double) -0.5) << std::endl;
+        std::cout << "2)  Errore Assoluto = " << 1/Taylor(ValueOfN[i], (double) 30) - exp((double) -30) << " | Errore Relativo = " << (1/Taylor(ValueOfN[i], (double) 30) - exp((double) 30)) / exp((double) -30) << std::endl;
         std::cout << std::endl;
     }
 }
@@ -96,19 +102,18 @@ void esercizio_2(){
 /*
 * Funzione che ti restituisce la il "polinomio di Taylor"
 */
-long double Taylor(int N, double x){
+double Taylor(int N, double x){
 
-    long double returnValue = 0;
-    for(int i=0; i<=N; i++){
+    double returnValue = 0;
+    for(int i=0; i<=N; i++)
         returnValue += (std::pow(x, i) / factorial(i));
-    }
     return returnValue;
 }
 
 /*
 * Funzione che ritorna il fattoriale di un numero
 */
-long factorial(int x){
+double factorial(int x){
     return (x == 0) ? 1 : x * factorial(x - 1);
 }
 

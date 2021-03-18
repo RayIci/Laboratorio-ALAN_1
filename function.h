@@ -21,12 +21,12 @@ void esercizio_2();
 /*
 * Funzione che ti restituisce la il "polinomio di Taylor"
 */
-long double Taylor(int N, double x);
+double Taylor(int N, double x);
 
 /*
 * Funzione che ritorna il fattoriale di un numero
 */
-long factorial(int x);
+double factorial(int x);
 
 /*
 * Funzione che restituisce il numero esp, cioè la precisione di macchiana per un float
